@@ -80,8 +80,6 @@
         })
         .then(data => {
 
-            this.data = data.slice(0, 20);
-
             var doc = d3.select("#draw_here");
 
             var doc_item = doc.selectAll("div")
