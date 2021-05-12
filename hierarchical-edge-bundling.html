@@ -61,47 +61,24 @@
 
             /* Unique Data for each Id  */
             var dataset = uniqueIds.map(id => {
-                let setOfRelevantData = data.filter(x => x.fromId = id )
+                let setOfRelevantData = data.filter(x => x.fromId == id)
+
                 let setOfUniqueToIds = Array.from(new Set(setOfRelevantData.map(({toId}) => toId)));
 
-                return setOfUniqueToIds.map(uniqueToId => {
+                let uniqueSentList = setOfUniqueToIds.map(toId => setOfRelevantData.find(x => x.toId == toId).toEmail)
 
-                    return {fromEmail : setOfRelevantData[0].fromEmail, imports: [], fromJobtitle: setOfRelevantData[0].fromJobtitle, emailsSent: setOfRelevantData.length }
-
-                })
+                return {
+                    fromEmail: setOfRelevantData[0].fromEmail,
+                    imports: uniqueSentList,
+                    fromJobtitle: setOfRelevantData[0].fromJobtitle,
+                    emailsSent: setOfRelevantData.length
+                }
 
 
             });
 
-            const result = dataset.reduce((acc, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {});
-            //console.log(dataset)
-            //console.log(result)
-
-            var highLevel = Object.values(months).map(x => {
-                return {"key": x, "value": []}
-            })
-
-            var highLevelMapped = highLevel.map(x => {
-
-                let month = x.key
-                let pertinentValues = Object.keys(result).filter(x => x.includes(month))
-                //console.log(month)
-                //console.log(pertinentValues)
-
-                let values = pertinentValues.map(x => {
-                    return {key: x.split("-")[0], value: result[x]}
-                })
-
-
-                return {key: x.key, values: values}
-                //console.log(values)
-            })
-
+            console.log(dataset)
         })
-
-
-
-
 
 
 </script>
