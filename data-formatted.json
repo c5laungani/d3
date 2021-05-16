@@ -21,6 +21,41 @@
     "size": 336
   },
   {
+    "name": "flare:Unknown:phillip.m.love@enron.com",
+    "imports": [
+      "flare:Employee:errol.mclaughlin@enron.com",
+      "flare:Employee:kam.keiser@enron.com",
+      "flare:Employee:c..giron@enron.com",
+      "flare:Unknown:monique.sanchez@enron.com",
+      "flare:Unknown:jason.wolfe@enron.com",
+      "flare:Vice President:jason.williams@enron.com",
+      "flare:Employee:matthew.lenhart@enron.com",
+      "flare:Manager:mike.grigsby@enron.com",
+      "flare:Trader:eric.bass@enron.com",
+      "flare:Manager:martin.cuilla@enron.com",
+      "flare:Unknown:robin.rodrigue@enron.com",
+      "flare:Employee:peter.keavey@enron.com",
+      "flare:Employee:susan.w.pereira@enron.com",
+      "flare:Director:sandra.f.brawner@enron.com",
+      "flare:Employee:chris.germany@enron.com",
+      "flare:Managing Director:john.hodge@enron.com",
+      "flare:Director:jonathan.mckay@enron.com",
+      "flare:Vice President:scott.neal@enron.com",
+      "flare:Unknown:vladi.pimenov@enron.com",
+      "flare:Unknown:andrea.ring@enron.com",
+      "flare:Employee:judy.townsend@enron.com",
+      "flare:Director:geoff.storey@enron.com",
+      "flare:Employee:brad.mckay@enron.com",
+      "flare:Vice President:jane.tholt@enron.com",
+      "flare:Trader:tori.kuykendall@enron.com",
+      "flare:Manager:phillip.k.ellen@enron.com",
+      "flare:Trader:kevin.ruscitti@enron.com",
+      "flare:Director:h..lewis@enron.com",
+      "flare:Vice President:hunter.s.shively@enron.com"
+    ],
+    "size": 384
+  },
+  {
     "name": "flare:Vice President:rod.hayslett@enron.com",
     "imports": [
       "flare:Employee:tracy.geaccone@enron.com",
@@ -1712,41 +1747,6 @@
       "flare:Trader:mike.swerzbin@enron.com"
     ],
     "size": 4
-  },
-  {
-    "name": "flare:Unknown:phillip.m.love@enron.com",
-    "imports": [
-      "flare:Employee:errol.mclaughlin@enron.com",
-      "flare:Employee:kam.keiser@enron.com",
-      "flare:Employee:c..giron@enron.com",
-      "flare:Unknown:monique.sanchez@enron.com",
-      "flare:Unknown:jason.wolfe@enron.com",
-      "flare:Vice President:jason.williams@enron.com",
-      "flare:Employee:matthew.lenhart@enron.com",
-      "flare:Manager:mike.grigsby@enron.com",
-      "flare:Trader:eric.bass@enron.com",
-      "flare:Manager:martin.cuilla@enron.com",
-      "flare:Unknown:robin.rodrigue@enron.com",
-      "flare:Employee:peter.keavey@enron.com",
-      "flare:Employee:susan.w.pereira@enron.com",
-      "flare:Director:sandra.f.brawner@enron.com",
-      "flare:Employee:chris.germany@enron.com",
-      "flare:Managing Director:john.hodge@enron.com",
-      "flare:Director:jonathan.mckay@enron.com",
-      "flare:Vice President:scott.neal@enron.com",
-      "flare:Unknown:vladi.pimenov@enron.com",
-      "flare:Unknown:andrea.ring@enron.com",
-      "flare:Employee:judy.townsend@enron.com",
-      "flare:Director:geoff.storey@enron.com",
-      "flare:Employee:brad.mckay@enron.com",
-      "flare:Vice President:jane.tholt@enron.com",
-      "flare:Trader:tori.kuykendall@enron.com",
-      "flare:Manager:phillip.k.ellen@enron.com",
-      "flare:Trader:kevin.ruscitti@enron.com",
-      "flare:Director:h..lewis@enron.com",
-      "flare:Vice President:hunter.s.shively@enron.com"
-    ],
-    "size": 384
   },
   {
     "name": "flare:Employee:dan.hyvl@enron.com",
