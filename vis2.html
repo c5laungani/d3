@@ -17,21 +17,15 @@
                 <div class="data">
                     <br>
                     <p>Data Selection</p>
-                    <form>
-                        <label for="employeetype">Choose a type of employee:</label>
-                        <select id="employeetype" name="employeetype">
-                            <option value="ceo">CEO</option>
-                            <option value="director">Director</option>
-                            <option value="employee">Employee</option>
-                            <option value="ihlawyer">In House Lawyer</option>
-                            <option value="manager">Manager</option>
-                            <option value="mdirector">Managing Director</option>
-                            <option value="president">President</option>
-                            <option value="trader">Trader</option>
-                            <option value="vpresident">Vice president</option>
-                        </select>
-                        <input type="submit">
-                    </form>
+                    
+                    <input type="button" class="button" value="Employee" onclick="employeeFunction()"> <br>
+                    <input type="button" class="button" value="CEO" onclick="ceoFunction()"> <br>
+                    <input type="button" class="button" value="In House Lawyer" onclick="ihlFunction()"> <br>
+                    <input type="button" class="button" value="Manager" onclick="managerFunction()"> <br>
+                    <input type="button" class="button" value="Managing Director" onclick="mdFunction()"> <br>
+                    <input type="button" class="button" value="President" onclick="presidentFunction()"> <br>
+                    <input type="button" class="button" value="Trader" onclick="traderFunction()"> <br>
+                    <input type="button" class="button" value="Vice President" onclick="vpFunction()"> <br>
                 </div>
                     
             </ul>
@@ -40,6 +34,33 @@
         <div class="middle">
             <h1> Visualization 2 </h1>
             <img class="graph" src="graph2.png" alt="Graph 2">
+            <p id="employeetype"></p>
         </div>
+        <script>            
+            function employeeFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose employee";                
+            }
+            function ceoFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose CEO";                
+            }
+            function ihlFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose In House Lawyer";                
+            }
+            function managerFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose Manager";                
+            }
+            function mdFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose Managing Director";                
+            }
+            function presidentFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose president";                
+            }
+            function traderFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose trader";                
+            }
+            function vpFunction() {
+                document.getElementById("employeetype").innerHTML = "You choose Vice President";                
+            }
+        </script> 
     </body>
 </html>

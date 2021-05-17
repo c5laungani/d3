@@ -63,3 +63,23 @@ form {
   padding: 1px 35px;
 }
 
+.button {
+  background-color: #272f53;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  font-family: 'Poppins', sans-serif;
+  width: 170px;
+}
+
+.button:hover {
+  background-color: #111;
+}
