@@ -13,8 +13,7 @@ ul {
     color: white;
     padding: 20px 20px;
     text-decoration: none;
-    text-transform: uppercase;
-    
+    text-transform: uppercase;    
   }
   
  li a:hover {
@@ -31,6 +30,7 @@ ul {
   margin-left:20%;
   padding: 1px 16px;
   height: 1000px;
+  text-align: center;
 }
 
 .description {
@@ -55,6 +55,7 @@ h1 {
 .data {
   text-align: center;
   font-size: 18px;
+  text-decoration: underline;
 }
 
 form {
