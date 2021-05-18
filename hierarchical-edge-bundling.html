@@ -61,6 +61,8 @@
 
     }
 
+
+
     fetch("./data.json")
         .then(response => {
             return response.json();
@@ -84,18 +86,20 @@
                 let setOfRelevantData = data.filter(x => x.fromId == id && x.toId != id)
                 let setOfUniqueToIds = Array.from(new Set(setOfRelevantData.map(({toId}) => toId)));
 
-                let uniqueSentList = setOfUniqueToIds.map(toId => "flare:" + setOfRelevantData.find(x => x.toId == toId).toJobtitle + ":" + setOfRelevantData.find(x => x.toId == toId).toEmail)
+                let uniqueSentList = setOfUniqueToIds.map(toId => "flare:" + setOfRelevantData.find(x => x.toId == toId).toJobtitle + ":" + setOfRelevantData.find(x => x.toId == toId).toEmail) 
+                let sentimentData = setOfUniqueToIds.map(toId => setOfRelevantData.find(x => x.toId == toId).sentiment) // Added the sentiment of each email to the formatted dataset
 
                 return {
                     name: "flare:" + setOfRelevantDataPre.jobTitle +  ":" + setOfRelevantDataPre.email,
-                    imports: uniqueSentList,
-                    size: setOfRelevantData.length
+                    imports: ":" + uniqueSentList,
+                    size: setOfRelevantData.length,
+                    sentiment: sentimentData // Added the sentiment of each email to the formatted dataset, so imports[0] corresponds with sentiment[0]
                 }
 
 
             });
 
-            downloadObject(dataset,'data-formatted.json')
+           downloadObject(dataset,'data-formatted.json')
         })
 
     function downloadObject(obj, filename){
@@ -106,7 +110,7 @@
         elem.download = filename;
         document.body.appendChild(elem);
         elem.click();
-        document.body.removeChild(elem);
+        document.body.removeChild(elem); 
     }
 </script>
 
@@ -133,6 +137,9 @@ This chart shows relationships among classes in a software hierarchy. Hover a cl
                 const svg = d3.create("svg")
                     .attr("viewBox", [-width / 2, -width / 2, width, width]);
 
+                let jobList = [];
+                var amount = 0
+
                 const node = svg.append("g")
                     .attr("font-family", "sans-serif")
                     .attr("font-size", 10)
@@ -141,7 +148,7 @@ This chart shows relationships among classes in a software hierarchy. Hover a cl
                     .join("g")
                     .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`)
                     .append("text")
-                    .attr("dy", "0.31em")
+                    .attr("dy", ".31em")
                     .attr("x", d => d.x < Math.PI ? 6 : -6)
                     .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
                     .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
@@ -150,7 +157,60 @@ This chart shows relationships among classes in a software hierarchy. Hover a cl
                     .on("mouseover", overed)
                     .on("mouseout", outed)
                     .call(text => text.append("title").text(d => `${id(d)}
-${d.outgoing.length} sent to List`));
+${d.outgoing.length} sent to List`))
+
+                //Adding the jobFunction label to each group
+                    svg.append("g")
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", 13)
+                    .attr("font-weight", 700)
+                    .selectAll("g")
+                    .data(root.leaves())
+                    .join("g")
+                    .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`)
+                    .append("text")
+                    .attr("dy", "0.6em")
+                    .attr("x", d => d.x < Math.PI ? 150 : -150)
+                    .attr("y", 0)
+                    .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+                    .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
+                    .text(function(d) {
+                        jobList.push(d.data.jobFunction)
+                        jobList = [...new Set(jobList)]                        
+                        for (var i = 0; i < jobList.length; i++ ) {                            
+                            if (d.data.jobFunction == jobList[i]) {
+                                if (amount > 0){
+                                    return ""
+                                }
+                                else{
+                                    if (amount == 0 & d.data.jobFunction == "CEO"){
+                                        amount =+ 1
+                                        return d.data.jobFunction
+                                        
+                                    }  
+                                    else if (amount == 1){
+                                        amount =+1
+                                        return d.data.jobFunction
+                                    }
+                                    else if (amount > 1){
+                                        return ""
+                                    } }                           
+                                
+                               
+                            }
+                            else {
+                                jobList.shift()
+                                amount = 0
+                                return d.data.jobFunction}}});
+                             
+
+                    
+                    
+                
+                
+                    
+
+            
 
                 const link = svg.append("g")
                     .attr("stroke", colornone)
@@ -191,15 +251,18 @@ ${d.outgoing.length} sent to List`));
                     const {name} = data;
                     if (map.has(name)) return map.get(name);
                     const i = name.lastIndexOf(delimiter);
+                    const j = name.lastIndexOf("flare:") //To get the Job function from the data
                     map.set(name, data);
                     if (i >= 0) {
                         find({name: name.substring(0, i), children: []}).children.push(data);
                         data.name = name.substring(i + 1);
+                        data.jobFunction = name.substring(j + 6, i); //Cut out the Job function from the "flare:..." string in data-formatted
                     } else {
                         root = data;
                     }
                     return data;
                 });
+
                 return root;
             }
         )});
@@ -232,7 +295,7 @@ ${d.outgoing.length} sent to List`));
             "#00f"
         )});
         main.variable(observer("colorout")).define("colorout", function(){return(
-            "#f00"
+            "#4287f5" //write function depending on sentiment
         )});
         main.variable(observer("colornone")).define("colornone", function(){return(
             "#ccc"
