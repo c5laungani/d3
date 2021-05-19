@@ -17,15 +17,13 @@
                 <div class="data">
                     <br>
                     <p>Data Selection</p>
-                    
-                    <input type="button" class="button" value="Employee" onclick="employeeFunction()"> <br>
-                    <input type="button" class="button" value="CEO" onclick="ceoFunction()"> <br>
-                    <input type="button" class="button" value="In House Lawyer" onclick="ihlFunction()"> <br>
-                    <input type="button" class="button" value="Manager" onclick="managerFunction()"> <br>
-                    <input type="button" class="button" value="Managing Director" onclick="mdFunction()"> <br>
-                    <input type="button" class="button" value="President" onclick="presidentFunction()"> <br>
-                    <input type="button" class="button" value="Trader" onclick="traderFunction()"> <br>
-                    <input type="button" class="button" value="Vice President" onclick="vpFunction()"> <br>
+                    <form>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label><br>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label><br>
+                        <input type="submit" value="Submit">
+                    </form>
                 </div>
                     
             </ul>
@@ -33,34 +31,7 @@
         </header>
         <div class="middle">
             <h1> Visualization 2 </h1>
-            <img class="graph" src="graph2.png" alt="Graph 2">
-            <p id="employeetype"></p>
+            <img class="graph" src="graph1.jpg" alt="Graph 1">
         </div>
-        <script>            
-            function employeeFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose employee";                
-            }
-            function ceoFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose CEO";                
-            }
-            function ihlFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose In House Lawyer";                
-            }
-            function managerFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose Manager";                
-            }
-            function mdFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose Managing Director";                
-            }
-            function presidentFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose president";                
-            }
-            function traderFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose trader";                
-            }
-            function vpFunction() {
-                document.getElementById("employeetype").innerHTML = "You choose Vice President";                
-            }
-        </script> 
     </body>
 </html>
