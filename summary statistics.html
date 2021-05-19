@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <title>bar chart for employee type</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    
+</head>
+<body>
+    <div style = "text-align: center;">
+        <h1>bar chart for employee type</h1>
+        <div id="d3-container"></div>
+    </div>
+    <div >
+      <canvas id="chart"></canvas>
+    </div>
+
+<script type="text/javascript">
+
+    data =[]
+    fetch("./data.json")
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+
+          var jobtitlecount = d3.nest() 
+            .key(function(d) { return d.name; })
+           .rollup(function(v) { return v.length; })
+            .entries(data);
+// counting the amount of job titles
+            var titles = []
+            var counts = []
+            for (const [key, value] of jobtitlecount.entries()) {
+              titles.append(key);
+              counts.append(value);
+            
+}
+// making the chart
+var chart = new Chart('chart', {
+    type: 'horizontalBar',
+    data: {
+      labels: titles,
+      datasets: [
+        {
+          data: counts
+        }
+      ]
+    }
+            })
+        ;
+
+
+
+</script>
+
+</body>
+</html>
