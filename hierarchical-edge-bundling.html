@@ -9,25 +9,6 @@
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="resources/d3logo.png">
-            </div>
-            <div class="col-md-10">
-                <h1 class="logo">D3 Examples</h1>
-                <h4>Richard Dalton</h4>
-                <div class="btn-group btn-group-md" role="group" aria-label="...">
-                    <a href="index.html" class="btn btn-default" role="button">Home</a>
-                    <a href="barChart.html" class="btn btn-default" role="button">Bar</a>
-                    <a href="http://www.d3js.org" class="btn btn-default" role="button">D3.js</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
 
 <script type="text/javascript">
 
@@ -280,7 +261,7 @@ ${d.outgoing.length} sent to List`))
             1000
         )});
         main.variable(observer("radius")).define("radius", ["width"], function(width){return(
-            width / 3
+            width / 3.25
         )});
         main.variable(observer("line")).define("line", ["d3"], function(d3){return(
             d3.lineRadial()
