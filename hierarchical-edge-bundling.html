@@ -29,24 +29,6 @@
 </header>
 
 
-<div class="container">
-    <h3>Bar Chart</h3>
-    <p>We can draw a bar chart by using svg to render a rectangle of the appropriate size for each datapoint.</p>
-    <p>In this example, we also use a D3 logarithmic scale, to map the domain of values 5-1300 to the range of
-        bar heights 0-500.</p>
-
-    <div class="col-md-6">
-        <div id="draw_here"></div>
-    </div>
-
-    <div class="col-md-6">
-<pre>
-
-
-</pre>
-    </div>
-</div>
-
 <script type="text/javascript">
 
     let getDataForId = function (id, data) {
@@ -99,7 +81,7 @@
 
             });
 
-           downloadObject(dataset,'data-formatted.json')
+           //downloadObject(dataset,'data-formatted.json')
         })
 
     function downloadObject(obj, filename){
@@ -127,7 +109,7 @@
         main.variable(observer()).define(["md","colorout","colorin"], function(md,colorout,colorin){return(
             md`# Hierarchical Edge Bundling
 
-This chart shows relationships among classes in a software hierarchy. Hover a class to reveal its imports (<b style="color: ${colorout};">outgoing</b> edges) and classes that import it (<b style="color: ${colorin};">incoming</b> edges).`
+This chart shows relationships between different types of employees at Enron in a hierarchy. Hover over an email to reveal the persons this employee sent an email to. (<b style="color: ${colorout};">outgoing</b> edges).`
         )});
         main.variable(observer("chart")).define("chart", ["tree","bilink","d3","data","width","id","colornone","line","colorin","colorout"], function(tree,bilink,d3,data,width,id,colornone,line,colorin,colorout)
             {
@@ -203,12 +185,6 @@ ${d.outgoing.length} sent to List`))
                                 amount = 0
                                 return d.data.jobFunction}}});
                              
-
-                    
-                    
-                
-                
-                    
 
             
 
@@ -304,7 +280,7 @@ ${d.outgoing.length} sent to List`))
             1000
         )});
         main.variable(observer("radius")).define("radius", ["width"], function(width){return(
-            width / 2
+            width / 3
         )});
         main.variable(observer("line")).define("line", ["d3"], function(d3){return(
             d3.lineRadial()
