@@ -30,7 +30,6 @@ ul {
 .middle {
   margin-left:20%;
   padding: 1px 16px;
-  height: 1000px;
   text-align: center;
 }
 
@@ -51,18 +50,13 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   width: 30%;
+  
 }
 
 .data {
   text-align: center;
   font-size: 18px;
   text-decoration: underline;
-}
-
-form {
-  text-align: left;
-  font-size: 15px;
-  padding: 1px 35px;
 }
 
 .button {
