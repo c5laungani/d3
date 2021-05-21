@@ -9,10 +9,8 @@ you may click the 'visualization 1' button on the nagivation bar to the left. Th
 "All data" to take a look at our Hierarchical edge bundling visualization and hover over specific emails
 to see how it reacts. 
 
-##Feature Explanation
-The hierarchical edge bundling visualization has been implemented after reading in the dataset.
+## Feature Explanation
+The hierarchical edge bundling visualization has been implemented after reading in the dataset. 
 You may hover over any specific email to see the emails of all the person that the employee has sent an email to. 
-The highlighted email is made bold and the links are colored with a shade of blue. 
-
-
+The highlighted email is made bold and the links are colored with a shade of blue.
 
