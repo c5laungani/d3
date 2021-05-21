@@ -49,7 +49,7 @@
                 let setOfRelevantData = data.filter(x => x.fromId == id && x.toId != id)
                 let setOfUniqueToIds = Array.from(new Set(setOfRelevantData.map(({toId}) => toId)));
 
-                let uniqueSentList = setOfUniqueToIds.map(toId => "flare:" + setOfRelevantData.find(x => x.toId == toId).toJobtitle + ":" + setOfRelevantData.find(x => x.toId == toId).toEmail) 
+                let uniqueSentList = setOfUniqueToIds.map(toId => "flare:" + setOfRelevantData.find(x => x.toId == toId).toJobtitle + ":" + setOfRelevantData.find(x => x.toId == toId).toEmail)
                 let sentimentData = setOfUniqueToIds.map(toId => setOfRelevantData.find(x => x.toId == toId).sentiment) // Added the sentiment of each email to the formatted dataset
 
                 return {
@@ -62,7 +62,7 @@
 
             });
 
-           //downloadObject(dataset,'data-formatted.json')
+            //downloadObject(dataset,'data-formatted.json')
         })
 
     function downloadObject(obj, filename){
@@ -73,7 +73,7 @@
         elem.download = filename;
         document.body.appendChild(elem);
         elem.click();
-        document.body.removeChild(elem); 
+        document.body.removeChild(elem);
     }
 </script>
 
@@ -89,7 +89,6 @@
         main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
         main.variable(observer()).define(["md","colorout","colorin"], function(md,colorout,colorin){return(
             md`# Hierarchical Edge Bundling
-
 This chart shows relationships between different types of employees at Enron in a hierarchy. Hover over an email to reveal the persons this employee sent an email to. (<b style="color: ${colorout};">outgoing</b> edges).`
         )});
         main.variable(observer("chart")).define("chart", ["tree","bilink","d3","data","width","id","colornone","line","colorin","colorout"], function(tree,bilink,d3,data,width,id,colornone,line,colorin,colorout)
@@ -123,7 +122,7 @@ This chart shows relationships between different types of employees at Enron in 
 ${d.outgoing.length} sent to List`))
 
                 //Adding the jobFunction label to each group
-                    svg.append("g")
+                svg.append("g")
                     .attr("font-family", "sans-serif")
                     .attr("font-size", 13)
                     .attr("font-weight", 700)
@@ -139,8 +138,8 @@ ${d.outgoing.length} sent to List`))
                     .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
                     .text(function(d) {
                         jobList.push(d.data.jobFunction)
-                        jobList = [...new Set(jobList)]                        
-                        for (var i = 0; i < jobList.length; i++ ) {                            
+                        jobList = [...new Set(jobList)]
+                        for (var i = 0; i < jobList.length; i++ ) {
                             if (d.data.jobFunction == jobList[i]) {
                                 if (amount > 0){
                                     return ""
@@ -149,25 +148,25 @@ ${d.outgoing.length} sent to List`))
                                     if (amount == 0 & d.data.jobFunction == "CEO"){
                                         amount =+ 1
                                         return d.data.jobFunction
-                                        
-                                    }  
+
+                                    }
                                     else if (amount == 1){
                                         amount =+1
                                         return d.data.jobFunction
                                     }
                                     else if (amount > 1){
                                         return ""
-                                    } }                           
-                                
-                               
+                                    } }
+
+
                             }
                             else {
                                 jobList.shift()
                                 amount = 0
                                 return d.data.jobFunction}}});
-                             
 
-            
+
+
 
                 const link = svg.append("g")
                     .attr("stroke", colornone)
@@ -227,7 +226,7 @@ ${d.outgoing.length} sent to List`))
             function bilink(root) {
                 const map = new Map(root.leaves().map(d => {
                     return [id(d), d]
-                 }))
+                }))
                 for (const d of root.leaves()) {
                     d.incoming = []
                     d.outgoing = d.data.imports.map(i => {
@@ -284,15 +283,6 @@ ${d.outgoing.length} sent to List`))
 
 
 </script>
-
-
-
-
-
-
-
-
-
 
 </body>
 
