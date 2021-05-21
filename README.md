@@ -5,6 +5,7 @@
 ## How to use
 To take a look at our website, and the visualization that we have implemented so far, you can 
 unzip the zip file. Now you can open the folder using an IDE such as Visual Studio Code or Webstorm.
+If you are using Visual Studio Code, make sure the "Live Server" extension is downloaded. 
 From here, you can open the index.html file on local host with a browser. This can be run on local host and this is our main website. 
 From there you may click the 'visualization 1' button on the nagivation bar to the left. Then you can select
 "All data" to take a look at our Hierarchical edge bundling visualization and hover over specific emails
