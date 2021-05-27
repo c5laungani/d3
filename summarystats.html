@@ -31,7 +31,43 @@
                 </div>
                     
             </ul>
+            <script type="text/javascript">
+
+                data =[]
+                fetch("./data.json")
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                      var count = d3.nest() 
+                        .key(function(d) { return d.name; })
+                       .rollup(function(v) { return v.length; })
+                        .entries(data);
+            // counting the amount of job titles
+                        var titles = []
+                        var counts = []
+                        for (const [key, value] of count.entries()) {
+                          titles.append(key);
+                          counts.append(value);
+                        
+            }
+            // making the chart
+            var chart = new Chart('chart', {
+                type: 'horizontalBar',
+                data: {
+                  labels: titles,
+                  datasets: [
+                    {
+                      data: counts
+                    }
+                  ]
+                }
+                        })
+                    ;
             
+            
+            
+            </script>
         </header>
         <div class="middle">
             <h1> Summary Statistics </h1>
