@@ -19,8 +19,8 @@ export default function define(runtime, observer) {
             const svg = d3.create("svg")
                 .attr("viewBox", [-width / 2, -width / 2, width, width])
                 .attr("style", "background-color: white")
-                .attr("width", "1400")
-                .attr("transform", "translate(490, 80)");
+                .attr("width", "1000")
+                .attr("transform", "translate(400, 80)");
                 
 
             let jobList = [];
