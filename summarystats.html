@@ -34,19 +34,16 @@
             <script type="text/javascript">
             <script src="https://d3js.org/d3.v3.min.js"></script>
 
-                        
-                // set the dimensions of the canvas
+                    
                 var margin = {top: 20, right: 20, bottom: 70, left: 40},
                     width = 600 - margin.left - margin.right,
                     height = 300 - margin.top - margin.bottom;
 
 
-                // set the ranges
                 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
                 var y = d3.scale.linear().range([height, 0]);
 
-                // define the axis
                 var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -58,7 +55,7 @@
                     .ticks(10);
 
 
-                // add the SVG element
+                
                 var svg = d3.select("body").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
@@ -67,7 +64,7 @@
                         "translate(" + margin.left + "," + margin.top + ")");
 
 
-                // load the data
+                // loading the data
                 d3.json("data.json", function(error, data) {
 
                     data.forEach(function(d) {
@@ -75,11 +72,9 @@
                         d.Freq = +d.Freq;
                     });
                     
-                // scale the range of the data
                 x.domain(data.map(function(d) { return d.Letter; }));
                 y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
-                // add axis
                 svg.append("g")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0," + height + ")")
@@ -101,7 +96,6 @@
                     .text("Frequency");
 
 
-                // Add bar chart
                 svg.selectAll("bar")
                     .data(data)
                     .enter().append("rect")
