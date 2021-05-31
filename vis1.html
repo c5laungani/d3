@@ -4,6 +4,8 @@
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <script src="https://d3js.org/d3.v6.min.js"></script>
         <title>Template Website</title>
     </head>
     <body>
@@ -35,10 +37,17 @@
             
         </header>
         <div class="middle">
-            <h1> Visualization 1 </h1>
-            <h3> The data selection is not working yet, you can only pick all data. We are still working on this.</h3>
+            <h1> Visualization 1: Hierarchical edge bundling </h1>
+            <h2>This chart shows relationships between different types of employees at Enron in a hierarchy. Hover over an email to reveal the persons this employee sent an email to. </h2>
+            <h3> (The data selection is not working yet, you can only pick all data. We are still working on this.)</h3>
+        
                                    
             <p id="employeetype"></p>
+            
+        </div>
+        <div class="container">
+            <script type = "text/javascript" src= "hierarchical-edge-bundlingA.js"></script>
+            <script type = "module" src = "hierarchical-edge-bundlingB.js"></script>  
         </div>
         <script>            
             function employeeFunction() {
