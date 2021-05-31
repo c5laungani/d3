@@ -30,7 +30,7 @@
                     <input type="button" class="button" value="Managing Director" onclick="mdFunction()"> <br>
                     <input type="button" class="button" value="President" onclick="presidentFunction()"> <br>
                     <input type="button" class="button" value="Trader" onclick="traderFunction()"> <br>
-                    <input type="button" class="button" value="Vice President" onclick="vpFunction()"> <br>
+                    <input type="button" class="button" value="Vice President" onclick="vpFunction()"> <br> <br><br><br>
                 </div>
                     
             </ul>
@@ -38,11 +38,13 @@
         </header>
         <div class="middle">
             <h1> Visualization 1: Hierarchical edge bundling </h1>
-            <h2>This chart shows relationships between different types of employees at Enron in a hierarchy. Hover over an email to reveal the persons this employee sent an email to. </h2>
-            <h3> (The data selection is not working yet, you can only pick all data. We are still working on this.)</h3>
-        
+            <div class="visdescription">
+                <p>This chart shows relationships between different types of employees at Enron in a hierarchy. 
+                    Hover over an email to reveal the persons this employee sent an email to. </p>
+                <p> (The data selection is not working yet, you can only pick all data. We are still working on this.)</p>
+            </div>
                                    
-            <p id="employeetype"></p>
+            <p id="employeetype">You choose all data</p>
             
         </div>
         <div class="container">
