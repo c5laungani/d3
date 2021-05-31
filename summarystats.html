@@ -35,7 +35,7 @@
             <script src="https://d3js.org/d3.v3.min.js"></script>
 
                     
-                var margin = {top: 20, right: 20, bottom: 70, left: 40},
+                var margin = {top: 20, right: 20, bottom: 60, left: 60},
                     width = 600 - margin.left - margin.right,
                     height = 300 - margin.top - margin.bottom;
 
@@ -68,11 +68,11 @@
                 d3.json("data.json", function(error, data) {
 
                     data.forEach(function(d) {
-                        d.Letter = d.Letter;
+                        d.fromJobtitle = d.fromJobtitle;
                         d.Freq = +d.Freq;
                     });
                     
-                x.domain(data.map(function(d) { return d.Letter; }));
+                x.domain(data.map(function(d) { return d.fromJobtitle; }));
                 y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
                 svg.append("g")
@@ -100,7 +100,7 @@
                     .data(data)
                     .enter().append("rect")
                     .attr("class", "bar")
-                    .attr("x", function(d) { return x(d.Letter); })
+                    .attr("x", function(d) { return x(d.fromJobtitle); })
                     .attr("width", x.rangeBand())
                     .attr("y", function(d) { return y(d.Freq); })
                     .attr("height", function(d) { return height - y(d.Freq); });
