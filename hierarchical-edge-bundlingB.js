@@ -24,6 +24,7 @@ export default function define(runtime, observer) {
                 
 
             let jobList = [];
+            var selectionCEO = [];
             var amount = 0
 
             const node = svg.append("g")
@@ -90,7 +91,28 @@ ${d.outgoing.length} sent to List`))
                             return d.data.jobFunction}}});
 
 
-
+            svg.append("g")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 13)
+                .attr("font-weight", 700)
+                .selectAll("g")
+                .data(root.leaves())
+                .join("g")
+                .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`)
+                .append("text")
+                .attr("dy", "0.6em")
+                .attr("x", d => d.x < Math.PI ? 150 : -150)
+                .attr("y", 0)
+                .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
+                .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
+                .text(function(d) {
+                    jobList.push(d.data.jobFunction)
+                    jobList = [...new Set(jobList)]
+                    for (var i = 0; i < jobList.length; i++ ) {
+                        if (d.data.jobFunction == "CEO") {
+                               
+                            return d.data.jobFunction}}})
+                .on("mouseover", overedLabel);
 
             const link = svg.append("g")
                 .attr("stroke", colornone)
@@ -115,6 +137,14 @@ ${d.outgoing.length} sent to List`))
                 d3.select(this).attr("font-weight", null);
                 d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null);
                 d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
+            }
+
+            function overedLabel(event, d) {
+                link.style("mix-blend-mode", null);
+                d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", colorout).raise();
+                d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", colorout).attr("font-weight", "bold");
+            }
+               
             }
 
             return svg.node();
