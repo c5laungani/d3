@@ -145,7 +145,7 @@ ${d.outgoing.length} sent to List`))
                 d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", colorout).attr("font-weight", "bold");
             }
                
-            }
+            
 
             return svg.node();
         }
