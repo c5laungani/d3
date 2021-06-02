@@ -31,13 +31,15 @@
                 </div>
                     
             </ul>
-            <script type="text/javascript">
+            
             <script src="https://d3js.org/d3.v3.min.js"></script>
+            <script type="text/javascript">
+        
 
                     
-                var margin = {top: 20, right: 20, bottom: 60, left: 60},
-                    width = 600 - margin.left - margin.right,
-                    height = 300 - margin.top - margin.bottom;
+                var margin = {top: 50, right: 50, bottom: 50, left: 50},
+                    width = 800 - margin.left - margin.right,
+                    height = 400 - margin.top - margin.bottom;
 
 
                 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
@@ -65,11 +67,15 @@
 
 
                 // loading the data
-                d3.json("data.json", function(error, data) {
-
-                    data.forEach(function(d) {
-                        d.fromJobtitle = d.fromJobtitle;
-                        d.Freq = +d.Freq;
+                fetch("./data.json")
+                    .then(response => {
+                         return response.json();
+                     })
+                         .then(data => {
+                             console.log (data);
+                             data.forEach(function(d) {
+                                d.fromJobtitle = d.fromJobtitle;
+                                d.Freq = +d.Freq;
                     });
                     
                 x.domain(data.map(function(d) { return d.fromJobtitle; }));
