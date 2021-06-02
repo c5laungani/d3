@@ -143,7 +143,7 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .values())
     )});
     main.variable(observer("rename")).define("rename", function(){return(
-            name => name.substring(name.indexOf(".") + 1, name.lastIndexOf("."))
+            name => name.substring(name.indexOf(":") + 1, name.lastIndexOf(":"))
     )});
     main.variable(observer("names")).define("names", ["data","d3"], function(data,d3){return(
             Array.from(new Set(data.flatMap(d => [d.source, d.target]))).sort(d3.ascending)
@@ -179,10 +179,10 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
             innerRadius + 10
     )});
     main.variable(observer("innerRadius")).define("innerRadius", ["width","height"], function(width,height){return(
-            Math.min(width, height) * 0.5 - 90
+            Math.min(width, height) * 0.5 - 120
     )});
     main.variable(observer("width")).define("width", function(){return(
-            954
+            800
     )});
     main.variable(observer("height")).define("height", ["width"], function(width){return(
             width
