@@ -31,10 +31,7 @@
                 </div>
                     
             </ul>
-            <div class="middle">
-                <h1> Summary Statistics </h1>
-                
-            </div>
+            
             <script src="https://d3js.org/d3.v3.min.js"></script>
             <script type="text/javascript">
         
@@ -62,11 +59,11 @@
 
                 
                 var svg = d3.select("body").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                .append("g")
+                    .attr("viewBox", [-width / 2, -width / 2, width, width])
+                    .attr("style", "background-color: white")
+                    .attr("width", "1000")
                     .attr("transform", 
-                        "translate(" + margin.left + "," + margin.top + ")");
+                        "translate(400, 80)");
 
 
                 // loading the data
@@ -119,6 +116,9 @@
                 });
             </script>
         </header>
-        
+        <div class="middle">
+            <h1> Summary Statistics </h1>
+            
+        </div>
     </body>
 </html>
