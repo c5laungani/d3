@@ -24,8 +24,9 @@ export default function define(runtime, observer) {
                 
 
             let jobList = [];
-            var selectionCEO = [];
+            var allJobFunctions = [];
             var amount = 0
+            
 
             const node = svg.append("g")
                 .attr("font-family", "sans-serif")
@@ -63,6 +64,7 @@ ${d.outgoing.length} sent to List`))
                 .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
                 .text(function(d) {
                     jobList.push(d.data.jobFunction)
+                    allJobFunctions.push(d.data.jobFunction)
                     jobList = [...new Set(jobList)]
                     for (var i = 0; i < jobList.length; i++ ) {
                         if (d.data.jobFunction == jobList[i]) {
@@ -88,31 +90,9 @@ ${d.outgoing.length} sent to List`))
                         else {
                             jobList.shift()
                             amount = 0
-                            return d.data.jobFunction}}});
-
-
-            svg.append("g")
-                .attr("font-family", "sans-serif")
-                .attr("font-size", 13)
-                .attr("font-weight", 700)
-                .selectAll("g")
-                .data(root.leaves())
-                .join("g")
-                .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`)
-                .append("text")
-                .attr("dy", "0.6em")
-                .attr("x", d => d.x < Math.PI ? 150 : -150)
-                .attr("y", 0)
-                .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
-                .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
-                .text(function(d) {
-                    jobList.push(d.data.jobFunction)
-                    jobList = [...new Set(jobList)]
-                    for (var i = 0; i < jobList.length; i++ ) {
-                        if (d.data.jobFunction == "CEO") {
-                               
                             return d.data.jobFunction}}})
-                .on("mouseover", overedLabel);
+                .on("mouseover", overedLabel)
+                .on("mouseout", outedLabel);
 
             const link = svg.append("g")
                 .attr("stroke", colornone)
@@ -139,13 +119,53 @@ ${d.outgoing.length} sent to List`))
                 d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
             }
 
-            function overedLabel(event, d) {
-                link.style("mix-blend-mode", null);
-                d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", colorout).raise();
-                d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", colorout).attr("font-weight", "bold");
-            }
+          
+         
+
+            //When hovering over a group label, this function is executed
+            function overedLabel(event, k) {
+                d3.select(this)
+                .attr("font-size", 23)
+                link.style("mix-blend-mode", null)
+                d3.selectAll(node)
+                .each(function (d, i){                   
+                    var colorGroup = "OrangeRed"
+                    if (d.data.jobFunction == k.data.jobFunction){                        
+                        d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke",colorGroup ).raise();  //Highlight all outgoing paths from all employees with this job type
+                        d3.selectAll(d.incoming.map(([, d]) => d.text)).attr("font-weight", "bold");                         
+                    }
                
-            }
+                })              
+            
+            
+            
+            }                       
+    
+                
+            //When the mouse stops hovering over a group label, this function is executed
+            function outedLabel(event, k) {
+                d3.select(this)
+                .attr("font-size", 13)
+                link.style("mix-blend-mode", "multiply")
+                d3.selectAll(node)
+                .each(function (d, i){
+                    if (d.data.jobFunction == k.data.jobFunction)
+                    d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null).raise();
+                    d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
+                })
+                
+                    }
+                   
+                
+              
+                
+                
+                
+                   
+               
+            
+               
+            
 
             return svg.node();
         }
