@@ -44,7 +44,7 @@
                     
                 var margin = {top: 50, right: 50, bottom: 50, left: 50},
                     width = 800 - margin.left - margin.right,
-                    height = 800 - margin.top - margin.bottom;
+                    height = 1200 - margin.top - margin.bottom;
 
 
                 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
@@ -73,14 +73,16 @@
 
 
                 // loading the data
-                fetch("./data.json")
+                fetch("./freq.json")
                     .then(response => {
                          return response.json();
                      })
                          .then(data => {
                              data.forEach(function(d) {
                                 d.fromJobtitle = d.fromJobtitle;
-                                d.Freq = +d.Freq;
+                                d.Freq = d.freq
+                                
+                                
                     });
                     
                 x.domain(data.map(function(d) { return d.fromJobtitle; }));
@@ -88,7 +90,7 @@
 
                 svg.append("g")
                     .attr("class", "x axis")
-                    .attr("transform", "translate(0," + 640 + ")")
+                    .attr("transform", "translate(0," + height + ")")
                     .call(xAxis)
                     .selectAll("text")
                     .style("text-anchor", "end")
