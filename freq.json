@@ -1,0 +1,44 @@
+[
+    {
+      "fromJobtitle": "Employee",
+      "freq": 40
+    },
+    {
+        "fromJobtitle": "Vice President",
+        "freq": 23
+    },
+    {
+        "fromJobtitle": "Unknown",
+        "freq": 31
+    },
+    {
+        "fromJobtitle": "Manager",
+        "freq": 14
+    },
+    {
+        "fromJobtitle": "CEO",
+        "freq": 4
+    },
+    {
+        "fromJobtitle": "Trader",
+        "freq": 13
+    },
+    {
+        "fromJobtitle": "Director",
+        "freq": 14
+    },
+    {
+        "fromJobtitle": "President",
+        "freq": 4
+    },
+    {
+        "fromJobtitle": "Managing Director",
+        "freq": 3
+    },
+    {
+        "fromJobtitle": "In House Lawyer",
+        "freq": 1
+    }
+]
+
+    
