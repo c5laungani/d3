@@ -31,6 +31,11 @@
                 </div>
                     
             </ul>
+            <style>
+                .bar {
+                    fill: steelblue;
+                }
+            </style>
             
             <script src="https://d3js.org/d3.v3.min.js"></script>
             <script type="text/javascript">
@@ -39,7 +44,7 @@
                     
                 var margin = {top: 50, right: 50, bottom: 50, left: 50},
                     width = 800 - margin.left - margin.right,
-                    height = 600 - margin.top - margin.bottom;
+                    height = 800 - margin.top - margin.bottom;
 
 
                 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
@@ -59,11 +64,12 @@
 
                 
                 var svg = d3.select("body").append("svg")
-                    .attr("viewBox", [-width / 2, -width / 2, width, width])
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
                     .attr("style", "background-color: white")
-                    .attr("width", "1000")
                     .attr("transform", 
-                        "translate(400, 80)");
+                        "translate(400, 80)"); 
+                
 
 
                 // loading the data
@@ -72,7 +78,6 @@
                          return response.json();
                      })
                          .then(data => {
-                             console.log (data);
                              data.forEach(function(d) {
                                 d.fromJobtitle = d.fromJobtitle;
                                 d.Freq = +d.Freq;
@@ -83,7 +88,7 @@
 
                 svg.append("g")
                     .attr("class", "x axis")
-                    .attr("transform", "translate(0," + height + ")")
+                    .attr("transform", "translate(0," + 640 + ")")
                     .call(xAxis)
                     .selectAll("text")
                     .style("text-anchor", "end")
@@ -101,17 +106,14 @@
                     .style("text-anchor", "end")
                     .text("Frequency");
 
-
-                svg.selectAll("bar")
+                svg.selectAll(".bar")
                     .data(data)
                     .enter().append("rect")
                     .attr("class", "bar")
                     .attr("x", function(d) { return x(d.fromJobtitle); })
                     .attr("width", x.rangeBand())
                     .attr("y", function(d) { return y(d.Freq); })
-                    .attr("height", function(d) { return height - y(d.Freq); })
-                    .attr("fill","red");
-                
+                    .attr("height", function(d) { return height - y(d.Freq); });
 
                 });
             </script>
