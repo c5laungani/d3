@@ -54,19 +54,19 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
             return svg.node();
         }
     );
-    main.variable(observer("data")).define("data", ["d3","FileAttachment","rename"], async function(d3,FileAttachment,rename){return(
+    main.variable().define("data", ["d3","FileAttachment","rename"], async function(d3,FileAttachment,rename){return(
         Array.from(d3.rollup((await FileAttachment("data-formatted.json").json())
                 .flatMap(({name: source, imports}) => imports.map(target => [rename(source), rename(target)])),
             ({0: [source, target], length: value}) => ({source, target, value}), link => link.join())
             .values())
     )});
-    main.variable(observer("rename")).define("rename", function(){return(
+    main.variable().define("rename", function(){return(
         name => name.substring(name.indexOf(":") + 1, name.lastIndexOf(":"))
     )});
-    main.variable(observer("names")).define("names", ["data","d3"], function(data,d3){return(
+    main.variable().define("names", ["data","d3"], function(data,d3){return(
         Array.from(new Set(data.flatMap(d => [d.source, d.target]))).sort(d3.ascending)
     )});
-    main.variable(observer("matrix")).define("matrix", ["names","data"], function(names,data)
+    main.variable().define("matrix", ["names","data"], function(names,data)
         {
             const index = new Map(names.map((name, i) => [name, i]));
             const matrix = Array.from(index, () => new Array(names.length).fill(0));
@@ -74,38 +74,38 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
             return matrix;
         }
     );
-    main.variable(observer("chord")).define("chord", ["d3","innerRadius"], function(d3,innerRadius){return(
+    main.variable().define("chord", ["d3","innerRadius"], function(d3,innerRadius){return(
         d3.chordDirected()
             .padAngle(10 / innerRadius)
             .sortSubgroups(d3.descending)
             .sortChords(d3.descending)
     )});
-    main.variable(observer("arc")).define("arc", ["d3","innerRadius","outerRadius"], function(d3,innerRadius,outerRadius){return(
+    main.variable().define("arc", ["d3","innerRadius","outerRadius"], function(d3,innerRadius,outerRadius){return(
         d3.arc()
             .innerRadius(innerRadius)
             .outerRadius(outerRadius)
     )});
-    main.variable(observer("ribbon")).define("ribbon", ["d3","innerRadius"], function(d3,innerRadius){return(
+    main.variable().define("ribbon", ["d3","innerRadius"], function(d3,innerRadius){return(
         d3.ribbonArrow()
             .radius(innerRadius - 1)
             .padAngle(1 / innerRadius)
     )});
-    main.variable(observer("color")).define("color", ["d3","names"], function(d3,names){return(
+    main.variable().define("color", ["d3","names"], function(d3,names){return(
         d3.scaleOrdinal(names, d3.quantize(d3.interpolateRainbow, names.length))
     )});
-    main.variable(observer("outerRadius")).define("outerRadius", ["innerRadius"], function(innerRadius){return(
+    main.variable().define("outerRadius", ["innerRadius"], function(innerRadius){return(
         innerRadius + 10
     )});
-    main.variable(observer("innerRadius")).define("innerRadius", ["width","height"], function(width,height){return(
+    main.variable().define("innerRadius", ["width","height"], function(width,height){return(
         Math.min(width, height) * 0.5 - 120
     )});
-    main.variable(observer("width")).define("width", function(){return(
+    main.variable().define("width", function(){return(
         800
     )});
-    main.variable(observer("height")).define("height", ["width"], function(width){return(
+    main.variable().define("height", ["width"], function(width){return(
         width
     )});
-    main.variable(observer("d3")).define("d3", ["require"], function(require){return(
+    main.variable().define("d3", ["require"], function(require){return(
         require("d3@6")
     )});
     return main;

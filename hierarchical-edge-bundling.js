@@ -170,10 +170,10 @@ ${d.outgoing.length} sent to List`))
             return svg.node();
         }
     );
-    main.variable(observer("data")).define("data", ["hierarchy","FileAttachment"], async function(hierarchy,FileAttachment){return(
+    main.variable().define("data", ["hierarchy","FileAttachment"], async function(hierarchy,FileAttachment){return(
         hierarchy(await FileAttachment(fileName).json())
     )});
-    main.variable(observer("hierarchy")).define("hierarchy", function(){return(
+    main.variable().define("hierarchy", function(){return(
         function hierarchy(data, delimiter = globalDelimiter) {
             let root;
             const map = new Map;
@@ -196,7 +196,7 @@ ${d.outgoing.length} sent to List`))
             return root;
         }
     )});
-    main.variable(observer("bilink")).define("bilink", ["id"], function(id){return(
+    main.variable().define("bilink", ["id"], function(id){return(
         function bilink(root) {
             const map = new Map(root.leaves().map(d => {
                 return [id(d), d]
@@ -216,37 +216,37 @@ ${d.outgoing.length} sent to List`))
             return root;
         }
     )});
-    main.variable(observer("id")).define("id", function(){return(
+    main.variable().define("id", function(){return(
         function id(node) {
             return `${node.parent ? id(node.parent) + globalDelimiter : ""}${node.data.name}`;
         }
     )});
-    main.variable(observer("colorin")).define("colorin", function(){return(
+    main.variable().define("colorin", function(){return(
         "#00f"
     )});
-    main.variable(observer("colorout")).define("colorout", function(){return(
+    main.variable().define("colorout", function(){return(
         "#4287f5" //write function depending on sentiment
     )});
-    main.variable(observer("colornone")).define("colornone", function(){return(
+    main.variable().define("colornone", function(){return(
         "#ccc"
     )});
-    main.variable(observer("width")).define("width", function(){return(
+    main.variable().define("width", function(){return(
         1000
     )});
-    main.variable(observer("radius")).define("radius", ["width"], function(width){return(
+    main.variable().define("radius", ["width"], function(width){return(
         width / 3.25
     )});
-    main.variable(observer("line")).define("line", ["d3"], function(d3){return(
+    main.variable().define("line", ["d3"], function(d3){return(
         d3.lineRadial()
             .curve(d3.curveBundle.beta(0.85))
             .radius(d => d.y)
             .angle(d => d.x)
     )});
-    main.variable(observer("tree")).define("tree", ["d3","radius"], function(d3,radius){return(
+    main.variable().define("tree", ["d3","radius"], function(d3,radius){return(
         d3.cluster()
             .size([2 * Math.PI, radius - 100])
     )});
-    main.variable(observer("d3")).define("d3", ["require"], function(require){return(
+    main.variable().define("d3", ["require"], function(require){return(
         require("d3@6")
     )});
     return main;
