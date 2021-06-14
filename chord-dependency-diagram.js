@@ -3,11 +3,6 @@ export default function define(runtime, observer) {
     const main = runtime.module();
     const fileAttachments = new Map([["data-formatted.json",new URL("./files/9b6806e3dd9c4c2c26760ba784437138c78b43a9a8e58a0bbafe5833026e3265637c9c7810224d66b79ba907b4d0be731c1a81ad043e10376aec3c18a49f3d84",import.meta.url)]]);
     main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
-    main.variable(observer()).define(["md"], function(md){return(
-        md`# Chord Dependency Diagram
-
-This [chord diagram](/@mbostock/d3-chord-diagram) shows dependencies among a software class hierarchy. Although it does not reveal class-level detail, as [hierarchical edge bundling](/@mbostock/d3-hierarchical-edge-bundling) does, it conveys the total number of imports between and within packages. Note, for example, that the *util* package does not import anything besides itself.`
-    )});
     main.variable(observer("chart")).define("chart", ["d3","width","height","chord","matrix","color","names","arc","outerRadius","ribbon"], function(d3,width,height,chord,matrix,color,names,arc,outerRadius,ribbon)
         {
             const svg = d3.create("svg")

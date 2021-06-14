@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>Template Website</title>
+</head>
+<body>
+<header>
+
+    <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="vis1.html">Visualization 1</a></li>
+        <li><a href="vis2.html">Visualization 2</a></li>
+        <li><a href="summarystats.html">Summary statistics</a></li>
+        <li><a href="visualizations.html">Visualizations</a></li>
+
+        <div class="data">
+            <br>
+            <p>Upload your Data file!</p>
+            <a href="upload.html">
+                <input type="button" class="button" value="Upload Data"> <br>
+            </a>
+
+        </div>
+
+    </ul>
+
+</header>
+<div class="middle">
+    <h1> Visualizations </h1>
+
+</div>
+
+<div class="container">
+    <script type = "text/javascript" src= "data-manipulation.js"></script>
+    <script type = "module" src = "hierarchical-edge-bundling.js"></script>
+</div>
+
+</body>
+</html>
