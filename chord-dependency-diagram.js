@@ -8,7 +8,7 @@ export default function define(runtime, observer) {
             const svg = d3.create("svg")
                 .attr("viewBox", [-width / 2, -height / 2, width, height])
                 .attr("style", "background-color: white")
-                .attr("width", "1000")
+                .attr("width", "600")
                 .attr("transform", "translate(400, 80)");
 
             const chords = chord(matrix);

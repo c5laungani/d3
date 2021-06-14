@@ -19,14 +19,14 @@ export default function define(runtime, observer) {
             const svg = d3.create("svg")
                 .attr("viewBox", [-width / 2, -width / 2, width, width])
                 .attr("style", "background-color: white")
-                .attr("width", "1000")
+                .attr("width", "600")
                 .attr("transform", "translate(400, 80)");
-                
+
 
             let jobList = [];
             var allJobFunctions = [];
             var amount = 0
-            
+
 
             const node = svg.append("g")
                 .attr("font-family", "sans-serif")
@@ -119,8 +119,8 @@ ${d.outgoing.length} sent to List`))
                 d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
             }
 
-          
-         
+
+
 
             //When hovering over a group label, this function is executed
             function overedLabel(event, k) {
@@ -128,20 +128,20 @@ ${d.outgoing.length} sent to List`))
                 .attr("font-size", 23)
                 link.style("mix-blend-mode", null)
                 d3.selectAll(node)
-                .each(function (d, i){                   
+                .each(function (d, i){
                     var colorGroup = "OrangeRed"
-                    if (d.data.jobFunction == k.data.jobFunction){                        
+                    if (d.data.jobFunction == k.data.jobFunction){
                         d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke",colorGroup ).raise();  //Highlight all outgoing paths from all employees with this job type
-                        d3.selectAll(d.incoming.map(([, d]) => d.text)).attr("font-weight", "bold");                         
+                        d3.selectAll(d.incoming.map(([, d]) => d.text)).attr("font-weight", "bold");
                     }
-               
-                })              
-            
-            
-            
-            }                       
-    
-                
+
+                })
+
+
+
+            }
+
+
             //When the mouse stops hovering over a group label, this function is executed
             function outedLabel(event, k) {
                 d3.select(this)
@@ -153,19 +153,19 @@ ${d.outgoing.length} sent to List`))
                     d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null).raise();
                     d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
                 })
-                
+
                     }
-                   
-                
-              
-                
-                
-                
-                   
-               
-            
-               
-            
+
+
+
+
+
+
+
+
+
+
+
 
             return svg.node();
         }

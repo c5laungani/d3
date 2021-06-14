@@ -18,7 +18,7 @@
                 <div class="data">
                     <br>
                     <p>Data Selection</p>
-                    <a href="hierarchical-edge-bundling.html"> 
+                    <a href="hierarchical-edge-bundling.html">
                         <input type="button" class="button" value="All Data"> <br>
                     </a>
                     <input type="button" class="button" value="Employee" onclick="employeeFunction()"> <br>
@@ -30,26 +30,23 @@
                     <input type="button" class="button" value="Trader" onclick="traderFunction()"> <br>
                     <input type="button" class="button" value="Vice President" onclick="vpFunction()"> <br><br><br><br>
                 </div>
-                    
+
             </ul>
-<<<<<<< Updated upstream
             <style>
                 .bar {
                     fill: steelblue;
                 }
             </style>
-=======
             <div class="middle">
                 <h1> Summary Statistics </h1>
-                
+
             </div>
->>>>>>> Stashed changes
-            
+
             <script src="https://d3js.org/d3.v3.min.js"></script>
             <script type="text/javascript">
-        
 
-                
+
+
                 var margin = {top: 50, right: 10, bottom: 100, left: 50},
                     width = 550 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
@@ -68,19 +65,19 @@
                     .scale(y)
                     .orient("left")
                     .ticks(10)
-                    
-                 
 
 
-                
+
+
+
                 var svg = d3.select("body").append("svg")
                     .attr("width", width  + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .attr("style", "background-color: white")
-                    .attr("transform", 
+                    .attr("transform",
                         "translate(330, -80)")
-                    .text("hello"); 
-                
+                    .text("hello");
+
 
 
                 // loading the data
@@ -92,14 +89,14 @@
                              data.forEach(function(d) {
                                 d.fromJobtitle = d.fromJobtitle;
                                 d.Freq = d.freq
-                                
-                                
+
+
                     });
-                    
+
                 x.domain(data.map(function(d) { return d.fromJobtitle; }));
                 y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
-                
+
 
                 svg.append("g")
                     .attr("font-size", 12)
@@ -112,7 +109,7 @@
                     .attr("dy", "-.55em")
                     .attr("transform", "rotate(-90)" )
 
-                
+
 
                 svg.append("g")
                     .attr("class", "y axis")
@@ -135,11 +132,11 @@
                     .attr("y", function(d) { return y(d.Freq); })
                     .attr("height", function(d) { return height - y(d.Freq) });
 
-                    
+
 
                 });
             </script>
         </header>
-        
+
     </body>
 </html>
