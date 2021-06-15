@@ -1,43 +1,54 @@
 [
     {
       "fromJobtitle": "Employee",
-      "freq": 40
+      "freq": 40,
+      "totalemailsent" : 9404
     },
     {
         "fromJobtitle": "Vice President",
-        "freq": 23
+        "freq": 23,
+        "totalemailsent" : 6295
     },
     {
         "fromJobtitle": "Unknown",
-        "freq": 31
+        "freq": 31,
+        "totalemailsent" : 8183
     },
     {
         "fromJobtitle": "Manager",
-        "freq": 14
+        "freq": 14,
+        "totalemailsent" : 3301
+
     },
     {
         "fromJobtitle": "CEO",
-        "freq": 4
+        "freq": 4,
+        "totalemailsent" : 719
     },
     {
         "fromJobtitle": "Trader",
-        "freq": 13
+        "freq": 13,
+        "totalemailsent" : 896
     },
     {
         "fromJobtitle": "Director",
-        "freq": 14
+        "freq": 14,
+        "totalemailsent" : 839
     },
     {
         "fromJobtitle": "President",
-        "freq": 4
+        "freq": 4,
+        "totalemailsent" : 989
     },
     {
         "fromJobtitle": "Managing Director",
-        "freq": 3
+        "freq": 3,
+        "totalemailsent" : 356
     },
     {
         "fromJobtitle": "In House Lawyer",
-        "freq": 1
+        "freq": 1,
+        "totalemailsent" : 59
     }
 ]
 
