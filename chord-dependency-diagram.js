@@ -5,10 +5,14 @@ export default function define(runtime, observer) {
     main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
     main.variable(observer("chart")).define("chart", ["d3","width","height","chord","matrix","color","names","arc","outerRadius","ribbon"], function(d3,width,height,chord,matrix,color,names,arc,outerRadius,ribbon)
         {
+
+            const brush = d3.brush()
+
             const svg = d3.create("svg")
                 .attr("viewBox", [-width / 2, -height / 2, width, height])
                 .attr("style", "background-color: white")
                 .attr("width", "600")
+                .attr("id", "#chord_dep_diag")
                 .attr("transform", "translate(400, 80)");
 
             const chords = chord(matrix);
@@ -19,6 +23,7 @@ export default function define(runtime, observer) {
                 .selectAll("g")
                 .data(chords.groups)
                 .join("g");
+
 
             group.append("path")
                 .attr("fill", d => color(names[d.index]))
@@ -40,7 +45,7 @@ export default function define(runtime, observer) {
 ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →
 ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);
 
-            svg.append("g")
+             svg.append("g")
                 .attr("fill-opacity", 0.75)
                 .selectAll("path")
                 .data(chords)
@@ -51,9 +56,17 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming �
                 .append("title")
                 .text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);
 
+
+            svg.append("g")
+                .call(brush);
+
+
             return svg.node();
         }
+
     );
+
+
     main.variable().define("data", ["d3","FileAttachment","rename"], async function(d3,FileAttachment,rename){return(
         Array.from(d3.rollup((await FileAttachment("data-formatted.json").json())
                 .flatMap(({name: source, imports}) => imports.map(target => [rename(source), rename(target)])),
