@@ -13,13 +13,48 @@
                 <li><a href="vis1.html">Visualization 1</a></li>
                 <li><a href="vis2.html">Visualization 2</a></li>
                 <li><a href="summarystats.html">Summary statistics</a></li>
+                <li><a href="visualizations.html">Visualizations</a></li>
                     
             </ul>
             
         </header>
         <div class="middle">
             <h1> Upload your Data! </h1>
-            
+            <form>
+                <div> 
+                    <label for="my_file">Choose json file to upload: </label>
+                    <input type="file" class="choose_file" id="selectFile" accept=".json">
+                </div>
+               
+                <div> 
+                    <input type="button" class="sbutton" id="submit" value="Sumbit">
+                </div>
+            </form>
+            <textarea id="result">
+                
+            </textarea>
+            <script>
+                document.getElementById('submit').onclick = function() {
+                    var files = document.getElementById('selectFile').files;
+                console.log(files);
+                if (files.length <= 0) {
+                    return false;
+                }
+                
+                var fr = new FileReader();
+                
+                fr.onload = function(e) { 
+                console.log(e);
+                    var result = JSON.parse(e.target.result);
+                    var formatted = JSON.stringify(result, null, 2);
+                        document.getElementById('result').value = formatted;
+                }
+                
+                fr.readAsText(files.item(0));
+                };
+                
+                
+            </script>
                 
         </div>
     </body>
