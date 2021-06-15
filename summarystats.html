@@ -132,6 +132,37 @@
                     .attr("y", function(d) { return y(d.Freq); })
                     .attr("height", function(d) { return height - y(d.Freq) });
 
+                x.domain(data.map(function(d) { return d.fromJobtitle; }));
+                y.domain([0, d3.max(data, function(d) { return d.totalemailsent; })]);
+
+                svg.append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis)
+                    .selectAll("text")
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", "-.55em")
+                    .attr("transform", "rotate(-90)" );
+
+                svg.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis)
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 5)
+                    .attr("dy", ".71em")
+                    .style("text-anchor", "end")
+                    .text("Frequency");
+
+                svg.selectAll(".bar")
+                    .data(data)
+                    .enter().append("rect")
+                    .attr("class", "bar")
+                    .attr("x", function(d) { return x(d.fromJobtitle); })
+                    .attr("width", x.rangeBand())
+                    .attr("y", function(d) { return y(d.Freq); })
+                    .attr("height", function(d) { return height - y(d.totalemailsent); });
 
 
                 });
