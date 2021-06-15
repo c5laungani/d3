@@ -33,7 +33,14 @@
 
             </ul>
             <style>
+                .explainText{
+                    fill: white;
+
+                }
                 .bar {
+                    fill: steelblue;
+                }
+                .bar2{
                     fill: steelblue;
                 }
             </style>
@@ -75,7 +82,34 @@
                     .attr("height", height + margin.top + margin.bottom)
                     .attr("style", "background-color: white")
                     .attr("transform",
-                        "translate(330, -10)");
+                        "translate(330, -10)")
+                    .on("mouseover", explain)
+                    .on("mouseout", showGraph);
+                
+                function explain(event, d){
+                    d3.select(this).attr("style", "background-color: black")
+                    d3.selectAll(".bar").attr("style", "fill: black") 
+                    svg.selectAll(".explainText")                  
+                    .append("text")
+                    .attr("class", "explainText")
+                    .text("Here we will explain something about this summary statistic.")
+                    .attr("font-size", 15)
+                    .attr("style", "fill: white")
+                    .attr("transform", "translate(80, 100)")
+                    svg.append("text")
+                    .text("This way we will also have some interaction here")
+                    .attr("font-size", 15)
+                    .attr("style", "fill: white")
+                    .attr("transform", "translate(80, 120)")
+                    ;
+                }
+
+                function showGraph(){
+                    d3.select(this).attr("style", "background-color: white")
+                    d3.selectAll(".bar").attr("style", "fill: steelblue")
+                    d3.selectAll("explainText").attr("style", "fill: transparent");
+                    
+                }
 
                 
 
@@ -170,10 +204,10 @@
                     .text("Total emails sent")
                     .attr("font-size", 12);
 
-                svg2.selectAll(".bar")
+                svg2.selectAll(".bar2")
                     .data(data)
                     .enter().append("rect")
-                    .attr("class", "bar")
+                    .attr("class", "bar2")
                     .attr("x", function(d) { return x(d.fromJobtitle); })
                     .attr("transform", "translate(20,0)")
                     .attr("width", x.rangeBand())
