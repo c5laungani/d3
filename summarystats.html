@@ -75,8 +75,9 @@
                     .attr("height", height + margin.top + margin.bottom)
                     .attr("style", "background-color: white")
                     .attr("transform",
-                        "translate(330, -80)")
-                    .text("hello");
+                        "translate(330, -10)");
+
+                
 
 
 
@@ -110,13 +111,14 @@
                     .attr("transform", "rotate(-90)" )
 
 
-
+             
                 svg.append("g")
                     .attr("class", "y axis")
                     .call(yAxis)
                     .attr("transform", "translate(50, 0)")
+                    .attr("font-size", 12)
                     .append("text")
-                    .attr("transform", "rotate(-90) translate(-10, -50)")
+                    .attr("transform", "rotate(-90) translate(-20, -50)")
                     .attr("y", 5)
                     .attr("dy", ".71em")
                     .style("text-anchor", "end")
@@ -132,37 +134,53 @@
                     .attr("y", function(d) { return y(d.Freq); })
                     .attr("height", function(d) { return height - y(d.Freq) });
 
+                    //Bar Chart #2
+
+                var svg2 = d3.select("body").append("svg")
+                    .attr("width", width  + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .attr("style", "background-color: white")
+                    .attr("transform",
+                        "translate(400, -10)");
+
                 x.domain(data.map(function(d) { return d.fromJobtitle; }));
                 y.domain([0, d3.max(data, function(d) { return d.totalemailsent; })]);
 
-                svg.append("g")
+                svg2.append("g")
                     .attr("class", "x axis")
-                    .attr("transform", "translate(0," + height + ")")
+                    .attr("transform", "translate(20," + height + ")")
                     .call(xAxis)
                     .selectAll("text")
+                    .attr("font-size", 12)
                     .style("text-anchor", "end")
                     .attr("dx", "-.8em")
                     .attr("dy", "-.55em")
                     .attr("transform", "rotate(-90)" );
 
-                svg.append("g")
+                svg2.append("g")
                     .attr("class", "y axis")
                     .call(yAxis)
+                    .attr("transform", "translate(70, 0)")
+                    .attr("font-size", 12)
                     .append("text")
-                    .attr("transform", "rotate(-90)")
+                    .attr("transform", "rotate(-90) translate(-20, -65)")
                     .attr("y", 5)
                     .attr("dy", ".71em")
                     .style("text-anchor", "end")
-                    .text("Frequency");
+                    .text("Total emails sent")
+                    .attr("font-size", 12);
 
-                svg.selectAll(".bar")
+                svg2.selectAll(".bar")
                     .data(data)
                     .enter().append("rect")
                     .attr("class", "bar")
                     .attr("x", function(d) { return x(d.fromJobtitle); })
+                    .attr("transform", "translate(20,0)")
                     .attr("width", x.rangeBand())
-                    .attr("y", function(d) { return y(d.Freq); })
+                    .attr("y", function(d) { return y(d.totalemailsent); })
                     .attr("height", function(d) { return height - y(d.totalemailsent); });
+
+               
 
 
                 });
