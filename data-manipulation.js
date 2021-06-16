@@ -1,4 +1,4 @@
-
+var dispatch = d3.dispatch("groupHovered", "nodesHighlighted");
 
        let getDataForId = function (id, data) {
         let fromData = data.filter(x => x.fromId == id)
