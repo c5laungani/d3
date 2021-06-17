@@ -78,7 +78,6 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     var nodes = Object.values(chords.groups);
 
 
-
                     var selectedNodes = [];
                     nodes.each(function(node)
                     {
@@ -151,14 +150,7 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
             )
         });
 
-        function ribbon (d3, innerRaidus) {
-            return (
-                d3.ribbonArrow()
-                    .radius(innerRadius - 1)
-                    .padAngle(1 / innerRadius)
-            )
 
-        }
         main.variable().define("color", ["d3", "names"], function (d3, names) {
             return (
                 d3.scaleOrdinal(names, d3.quantize(d3.interpolateRainbow, names.length))

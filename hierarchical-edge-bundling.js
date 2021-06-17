@@ -106,7 +106,7 @@ ${d.outgoing.length} sent to List`))
                         d.path = this;
                     });
 
-                console.log(node)
+
                 function overed(event, d) {
                     link.style("mix-blend-mode", null);
                     d3.select(this).attr("font-weight", "bold");
