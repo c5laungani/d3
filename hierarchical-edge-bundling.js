@@ -106,7 +106,7 @@ ${d.outgoing.length} sent to List`))
                         d.path = this;
                     });
 
-
+                console.log(node)
                 function overed(event, d) {
                     link.style("mix-blend-mode", null);
                     d3.select(this).attr("font-weight", "bold");
@@ -155,13 +155,14 @@ ${d.outgoing.length} sent to List`))
 
                 }
 
-                dispatch.on("nodesHighlighted.hierarchical", function(stations) {
+
+                /*dispatch.on("nodesHighlighted.hierarchical", function(stations) {
                     if(stations) {
                         visUpdated(stations);
                     } else {
                         visUpdated(allNodes);
                     }
-                })
+                })*/
 
 
                 return svg.node();

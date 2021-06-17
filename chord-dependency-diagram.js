@@ -5,7 +5,9 @@
         main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
         main.variable(observer("chart")).define("chart", ["d3", "width", "height", "chord", "matrix", "color", "names", "arc", "outerRadius", "ribbon"], function (d3, width, height, chord, matrix, color, names, arc, outerRadius, ribbon) {
 
-                const brush = d3.brush().on("end", brushended);
+
+
+                var dispatch = d3.dispatch("nodesHighlighted");
 
                 const svg = d3.create("svg")
                     .attr("viewBox", [-width / 2, -height / 2, width, height])
@@ -55,12 +57,13 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .append("title")
                     .text(d => `${names[d.source.index]} â†’ ${names[d.target.index]} ${d.source.value}`);
 
+                console.log(chords.groups)
 
-                svg.append("g")
-                    .call(brush);
+                function brushended(event) {
+                    var s = event.selection;
 
-                function brushended() {
-                    var s = d3.event.selection;
+                    //console.log(s)
+
 
                     if(!s)
                     {
@@ -72,8 +75,9 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     x.sort(function(a,b) { return a - b; });
                     y.sort(function(a,b) { return a - b; });
 
-                    var nodes = nodelinkSvg
-                        .selectAll("circle");
+                    var nodes = Object.values(chords.groups);
+
+
 
                     var selectedNodes = [];
                     nodes.each(function(node)
@@ -84,12 +88,18 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                         }
                     });
 
+
+
                     dispatch.call("nodesHighlighted", null, selectedNodes);
                 }
 
 
+                const brush = d3.brush().on("end", brushended);
+                svg.append("g")
+                    .call(brush);
+
                 return svg.node();
-            }
+         }
         );
 
 
@@ -140,6 +150,15 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .padAngle(1 / innerRadius)
             )
         });
+
+        function ribbon (d3, innerRaidus) {
+            return (
+                d3.ribbonArrow()
+                    .radius(innerRadius - 1)
+                    .padAngle(1 / innerRadius)
+            )
+
+        }
         main.variable().define("color", ["d3", "names"], function (d3, names) {
             return (
                 d3.scaleOrdinal(names, d3.quantize(d3.interpolateRainbow, names.length))
