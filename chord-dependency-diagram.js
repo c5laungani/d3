@@ -57,13 +57,13 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .append("title")
                     .text(d => `${names[d.source.index]} â†’ ${names[d.target.index]} ${d.source.value}`);
 
-                console.log(chords.groups)
-
+                //console.log(chords.groups)
+                
                 function brushended(event) {
                     var s = event.selection;
 
-                    //console.log(s)
-
+                    //console.log(s[1][1])
+                    //console.log(s[1][0])
 
                     if(!s)
                     {
@@ -72,16 +72,48 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     }
                     var x = [s[0][0], s[1][0]];
                     var y = [s[0][1], s[1][1]];
-                    x.sort(function(a,b) { return a - b; });
-                    y.sort(function(a,b) { return a - b; });
+
+
+
+                    function findAngle(y,x) {
+                        var actualAngle = 0;
+                        var refAngle = Math.atan(y/x)
+                        console.log(refAngle)
+                        if ( x <= 0 && y <= 0 ) {
+                            actualAngle = 4.71 + refAngle;
+                            return actualAngle;
+                        }
+                        else if (x <= 0 && y >= 0 ) {
+                            actualAngle = 4.71 + refAngle;
+                            return actualAngle;
+                        }
+                        else if (x >= 0 && y >= 0 ) {
+                            actualAngle = 1.57 + refAngle;
+                            return actualAngle;
+                        }
+                        else if (x >= 0 && y <= 0) {
+                            actualAngle = 1.57 + refAngle;
+                            return actualAngle;
+                        }
+                        else {
+                            return -1;
+                        }
+
+                    }
+
+                    var angle = findAngle(y[1],x[1]);
+
+                    //console.log(angle)
+
 
                     var nodes = Object.values(chords.groups);
 
 
+
                     var selectedNodes = [];
-                    nodes.each(function(node)
+                    nodes.forEach(function(node)
                     {
-                        if(node.x >= x[0] && node.x <= x[1] && node.y >= y[0] && node.y <= y[1])
+                        if(angle >= node.startAngle && angle <= node.endAngle)
                         {
                             selectedNodes.push(node);
                         }
