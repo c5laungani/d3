@@ -5,7 +5,7 @@
         main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
         main.variable(observer("chart")).define("chart", ["d3", "width", "height", "chord", "matrix", "color", "names", "arc", "outerRadius", "ribbon"], function (d3, width, height, chord, matrix, color, names, arc, outerRadius, ribbon) {
 
-                var dispatch = d3.dispatch("highlighted");
+                var dispatch = d3.dispatch("highlightedNode");
 
                 const svg = d3.create("svg")
                     .attr("viewBox", [-width / 2, -height / 2, width, height])
@@ -56,13 +56,13 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .text(d => `${names[d.source.index]} â†’ ${names[d.target.index]} ${d.source.value}`);
 
                 
-                function brushended(event) {
+               /* function brushended(event) {
                     var s = event.selection;
 
 
                     if(!s)
                     {
-                        dispatch.call("nodesHighlighted", null, null);
+                        dispatch.call("highlightedNode", null, null);
                         return;
                     }
                     var x = [s[0][0], s[1][0]];
@@ -71,7 +71,6 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     function findAngle(y,x) {
                         var actualAngle = 0;
                         var refAngle = Math.atan(y/x)
-                        console.log(refAngle)
                         if ( x <= 0 && y <= 0 ) {
                             actualAngle = 4.71 + refAngle;
                             return actualAngle;
@@ -121,7 +120,7 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
 
                 const brush = d3.brush().on("end", brushended);
                 svg.append("g")
-                    .call(brush);
+                    .call(brush);*/
 
                 return svg.node();
          }

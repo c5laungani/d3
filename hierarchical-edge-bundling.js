@@ -21,6 +21,8 @@ import {Runtime, Inspector} from "./runtime.js";
                     .attr("width", "600")
                     .attr("transform", "translate(400, 80)");
 
+                var dispatch = d3.dispatch("highlightedNode");
+
 
                 let jobList = [];
                 var allJobFunctions = [];
@@ -141,6 +143,24 @@ ${d.outgoing.length} sent to List`))
                 }
 
 
+            function overedLabel2(event, k) {
+                d3.select(this)
+                    .attr("font-size", 23)
+                link.style("mix-blend-mode", null)
+                d3.selectAll(node)
+                    .each(function (d, i) {
+                        var colorGroup = "OrangeRed"
+                        if (d.data.jobFunction == k) {
+                            d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", colorGroup).raise();  //Highlight all outgoing paths from all employees with this job type
+                            d3.selectAll(d.incoming.map(([, d]) => d.text)).attr("font-weight", "bold");
+                        }
+
+                    })
+
+
+            }
+
+
                 //When the mouse stops hovering over a group label, this function is executed
                 function outedLabel(event, k) {
                     d3.select(this)
@@ -148,6 +168,7 @@ ${d.outgoing.length} sent to List`))
                     link.style("mix-blend-mode", "multiply")
                     d3.selectAll(node)
                         .each(function (d, i) {
+                            console.log(k.data.jobFunction)
                             if (d.data.jobFunction == k.data.jobFunction)
                                 d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null).raise();
                             d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
@@ -156,13 +177,10 @@ ${d.outgoing.length} sent to List`))
                 }
 
 
-                /*dispatch.on("nodesHighlighted.hierarchical", function(stations) {
-                    if(stations) {
-                        visUpdated(stations);
-                    } else {
-                        visUpdated(allNodes);
-                    }
-                })*/
+                dispatch.on("highlightedNode", function(node) {
+                    console.log("HelloWorld")
+
+                })
 
 
                 return svg.node();
