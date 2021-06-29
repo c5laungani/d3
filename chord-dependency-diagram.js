@@ -5,9 +5,7 @@
         main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
         main.variable(observer("chart")).define("chart", ["d3", "width", "height", "chord", "matrix", "color", "names", "arc", "outerRadius", "ribbon"], function (d3, width, height, chord, matrix, color, names, arc, outerRadius, ribbon) {
 
-
-
-                var dispatch = d3.dispatch("nodesHighlighted");
+                var dispatch = d3.dispatch("highlighted");
 
                 const svg = d3.create("svg")
                     .attr("viewBox", [-width / 2, -height / 2, width, height])
@@ -57,13 +55,10 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     .append("title")
                     .text(d => `${names[d.source.index]} â†’ ${names[d.target.index]} ${d.source.value}`);
 
-                //console.log(chords.groups)
                 
                 function brushended(event) {
                     var s = event.selection;
 
-                    //console.log(s[1][1])
-                    //console.log(s[1][0])
 
                     if(!s)
                     {
@@ -72,8 +67,6 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
                     }
                     var x = [s[0][0], s[1][0]];
                     var y = [s[0][1], s[1][1]];
-
-
 
                     function findAngle(y,x) {
                         var actualAngle = 0;
@@ -101,27 +94,28 @@ ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming â
 
                     }
 
+
                     var angle = findAngle(y[1],x[1]);
 
-                    //console.log(angle)
 
 
                     var nodes = Object.values(chords.groups);
 
 
-
-                    var selectedNodes = [];
+                    var selectedNode = {} ;
                     nodes.forEach(function(node)
                     {
-                        if(angle >= node.startAngle && angle <= node.endAngle)
+
+                        if(angle >=node["startAngle"] && angle <=node["endAngle"])
                         {
-                            selectedNodes.push(node);
+                            selectedNode = node;
+
                         }
                     });
 
 
-
-                    dispatch.call("nodesHighlighted", null, selectedNodes);
+                    console.log("Select node is : ", names[selectedNode["index"]])
+                    dispatch.call("highlightedNode", null, selectedNode);
                 }
 
 
