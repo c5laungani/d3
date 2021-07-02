@@ -75,10 +75,9 @@
                     .attr("style", "background-color: white")
                     .attr("transform",
                         "translate(330, -10)")
-                    .on("mouseover", explain)
                     .on("mouseout", showGraph);
                 
-                function explain(event, d){
+               /* function explain(event, d){
                     d3.select(this).attr("style", "background-color: black")
                     d3.selectAll(".bar").attr("style", "fill: black") 
                     svg.selectAll(".explainText")                  
@@ -94,7 +93,7 @@
                     .attr("style", "fill: white")
                     .attr("transform", "translate(80, 120)")
                     ;
-                }
+                }*/
 
                 function showGraph(){
                     d3.select(this).attr("style", "background-color: white")
@@ -167,7 +166,7 @@
                     .attr("height", height + margin.top + margin.bottom)
                     .attr("style", "background-color: white")
                     .attr("transform",
-                        "translate(400, -10)");
+                        "translate(360, -10)");
 
                 x.domain(data.map(function(d) { return d.fromJobtitle; }));
                 y.domain([0, d3.max(data, function(d) { return d.totalemailsent; })]);
